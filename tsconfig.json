@@ -8,7 +8,9 @@
     // See also https://aka.ms/tsconfig/module
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
     "module": "nodenext",
     "target": "esnext",
@@ -17,7 +19,9 @@
     ],
     // For nodejs:
     "lib": [
-      "esnext"
+      "esnext",
+      "dom",
+      "dom.iterable"
     ],
     "allowImportingTsExtensions": true,
     // "types": ["node"],

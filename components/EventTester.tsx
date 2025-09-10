@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export default function EventTester() {
   const [evento, setEvento] = useState("");
   const [resultado, setResultado] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
   const textareaRef = useRef<any>(null);
 
   const enviar = async () => {
@@ -19,6 +20,13 @@ export default function EventTester() {
       console.error("Error al procesar el evento:", error);
     }
   };
+
+useEffect(() => {
+  document.body.style.cursor = loading ? "wait" : "default";
+  return () => {
+    document.body.style.cursor = "default"; // Cleanup por si se desmonta
+  };
+}, [loading]);
 
  useEffect(() => {
     if (evento === "" && textareaRef.current) {
