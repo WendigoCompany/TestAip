@@ -7,8 +7,9 @@ export default function EventTester() {
   const textareaRef = useRef<any>(null);
 
   const enviar = async () => {
-    if (!evento.trim()) return; // Validación mínima
+    if (!evento.trim()) return; 
     try {
+      setLoading(true)
       const res = await fetch("/api/procesar-evento", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -16,7 +17,9 @@ export default function EventTester() {
       });
       const data = await res.json();
       setResultado(data);
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.error("Error al procesar el evento:", error);
     }
   };
@@ -24,7 +27,7 @@ export default function EventTester() {
 useEffect(() => {
   document.body.style.cursor = loading ? "wait" : "default";
   return () => {
-    document.body.style.cursor = "default"; // Cleanup por si se desmonta
+    document.body.style.cursor = "default";  
   };
 }, [loading]);
 
