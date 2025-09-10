@@ -1,13 +1,3 @@
-.modo-claro {
-  background-color: #f9f9f9;
-  color: #222;
-}
-
-.modo-oscuro {
-  background-color: #121212;
-  color: #eee;
-}
-
 button {
   padding: 0.5rem 1rem;
   border: none;
