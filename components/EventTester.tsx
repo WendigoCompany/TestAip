@@ -20,6 +20,8 @@ export default function EventTester() {
   };
 
   const handleChange = (e: any) => {
+    console.log(e);
+    
     setEvento(e.target.value);
   };
   return (
