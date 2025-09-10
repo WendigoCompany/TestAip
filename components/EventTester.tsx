@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function EventTester() {
   const [evento, setEvento] = useState("");
   const [resultado, setResultado] = useState<any>(null);
+  const textareaRef = useRef<any>(null);
 
   const enviar = async () => {
     if (!evento.trim()) return; // Validación mínima
@@ -19,14 +20,19 @@ export default function EventTester() {
     }
   };
 
+ useEffect(() => {
+    if (evento === "" && textareaRef.current) {
+      textareaRef.current.value = "";
+    }
+  }, [evento]);
+
   const handleChange = (e: any) => {
-    console.log(e);
-    
     setEvento(e.target.value);
   };
   return (
     <div>
       <textarea
+        ref={textareaRef}
         value={evento}
         onChange={handleChange}
         placeholder="Escribí el evento..."
