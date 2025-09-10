@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../conection.tsx";
+import { sequelize } from "../conection.ts";
 
 export const Alarm = sequelize.define("Alarm", {
   id: {

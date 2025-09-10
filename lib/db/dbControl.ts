@@ -1,5 +1,5 @@
-import { sequelize } from "@/lib/db/conection.tsx";
-import { Alarm } from "./models/alarm.model.tsx";
+import { sequelize } from "@/lib/db/conection.ts";
+import { Alarm } from "./models/alarm.model.ts";
 
 const CHECK_INTERVAL_MS = 1000 * 60 * 60; 
 

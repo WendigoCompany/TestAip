@@ -1,5 +1,6 @@
+import { config } from "dotenv";
+config({ path: ".env.local" });
 import { Sequelize } from "sequelize";
-import { Alarm } from "./models/alarm.model.tsx";
 
 export const sequelize = new Sequelize(process.env.DATABASE_URL!, {
   dialect: "postgres",

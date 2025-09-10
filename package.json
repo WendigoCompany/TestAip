@@ -1,10 +1,10 @@
 {
   "type": "module",
   "scripts": {
-    "init-db": "ts-node lib/db/postgres.init.tsx",
-    "dev": "npm run init-db && next dev",
+    "init-db": "tsx lib/db/postgres.init.ts",
+    "dev": "next dev",
     "build": "next build",
-    "start": "npm run init-db && next start"
+    "start": "next start"
   },
   "devDependencies": {
     "@types/next": "^9.0.0",
@@ -20,6 +20,7 @@
     "pg-hstore": "^2.3.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "tsx": "^4.20.5"
   }
 }
