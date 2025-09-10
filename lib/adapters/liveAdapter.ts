@@ -101,7 +101,7 @@
 
 
 import OpenAI from "openai";
-import type { ResultadoIA, Severidad } from "./aiAdapter.js";
+import type { ResultadoIA, Severidad } from "./aiAdapter.ts";
 
 const client = new OpenAI({
   baseURL: "https://router.huggingface.co/v1",
@@ -109,21 +109,21 @@ const client = new OpenAI({
 });
 
 // Traducción universal a inglés
-async function traducirEntrada(texto: string): Promise<string> {
-  const response = await fetch(
-    "https://router.huggingface.co/hf-inference/models/Helsinki-NLP/opus-mt-mul-en",
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.HF_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ inputs: texto }),
-    }
-  );
-  const result = await response.json();
-  return result?.generated_text?.trim() || texto;
-}
+// async function traducirEntrada(texto: string): Promise<string> {
+//   const response = await fetch(
+//     "https://router.huggingface.co/hf-inference/models/Helsinki-NLP/opus-mt-mul-en",
+//     {
+//       headers: {
+//         Authorization: `Bearer ${process.env.HF_TOKEN}`,
+//         "Content-Type": "application/json",
+//       },
+//       method: "POST",
+//       body: JSON.stringify({ inputs: texto }),
+//     }
+//   );
+//   const result = await response.json();
+//   return result?.generated_text?.trim() || texto;
+// }
 
 export async function procesarEventoReal(
   textoOriginal: string

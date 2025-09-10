@@ -1,4 +1,4 @@
-import EventTester from '@/components/EventTester';
+import EventTester from '@/components/EventTester.tsx';
 
 export default function Home() {
   return (

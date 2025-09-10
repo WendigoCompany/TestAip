@@ -1,5 +1,6 @@
-// import { procesarEventoMock } from './mockAdapter';
-import { procesarEventoReal } from './liveAdapter';
+// import { procesarEventoMock } from './mockAdapter.ts';
+import { procesarEventoReal } from './liveAdapter.ts';
+
 
 const USE_MOCK = process.env.USE_MOCK === 'true';
 

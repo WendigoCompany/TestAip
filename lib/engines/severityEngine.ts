@@ -1,4 +1,4 @@
-import { Severidad } from "../adapters/aiAdapter";
+import type { Severidad } from "../adapters/aiAdapter.ts";
 console.log("🚨 Ejecutando analizarEvento");
 export interface Regla {
   palabra: string;

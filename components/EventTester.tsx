@@ -1,35 +1,49 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function EventTester() {
-  const [evento, setEvento] = useState('');
+  const [evento, setEvento] = useState("");
   const [resultado, setResultado] = useState<any>(null);
 
   const enviar = async () => {
-    const res = await fetch('/api/procesar-evento', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ evento })
-    });
-    const data = await res.json();
-    setResultado(data);
+    if (!evento.trim()) return; // Validación mínima
+    try {
+      const res = await fetch("/api/procesar-evento", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ evento }),
+      });
+      const data = await res.json();
+      setResultado(data);
+    } catch (error) {
+      console.error("Error al procesar el evento:", error);
+    }
   };
 
+  const handleChange = (e: any) => {
+    setEvento(e.target.value);
+  };
   return (
     <div>
       <textarea
         value={evento}
-        onChange={e => setEvento(e.target.value)}
+        onChange={handleChange}
         placeholder="Escribí el evento..."
         rows={4}
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
       />
       <button onClick={enviar}>Procesar evento</button>
 
       {resultado && (
-        <div style={{ marginTop: '1rem' }}>
-          <p><strong>Resumen:</strong> {resultado.resumen}</p>
-          <p><strong>Severidad:</strong> {resultado.severidad}</p>
-          <p><strong>Acción sugerida:</strong> {resultado.accion}</p>
+        <div style={{ marginTop: "1rem" }}>
+          <p>
+            <strong>Resumen:</strong> {resultado.resumen}
+          </p>
+          <p>
+            <strong>Severidad:</strong> {resultado.severidad}
+          </p>
+          <p>
+            <strong>Acción sugerida:</strong> {resultado.accion}
+          </p>
         </div>
       )}
     </div>

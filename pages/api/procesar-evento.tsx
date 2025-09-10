@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { procesarEvento } from '@/lib/adapters/aiAdapter';
-import { crearLogger } from '@/lib/utils/logger';
+import { procesarEvento } from '@/lib/adapters/aiAdapter.ts';
+import { crearLogger } from '@/lib/utils/logger.ts';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const logger = crearLogger();

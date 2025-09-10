@@ -1,5 +1,5 @@
-import { analizarEvento } from "@/lib/engines/severityEngine";
-import type { ResultadoIA, Severidad } from "./aiAdapter";
+import { analizarEvento } from "@/lib/engines/severityEngine.ts";
+import type { ResultadoIA, Severidad } from "./aiAdapter.ts";
 
 export function procesarEventoMock(evento: string): ResultadoIA {
   const resultado = analizarEvento(evento);
