@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import "@/styles/index.css";
+
 
 export default function EventTester() {
   const [evento, setEvento] = useState("");
