@@ -1,13 +1,15 @@
-import type { Severidad } from "../adapters/aiAdapter.ts";
-console.log("🚨 Ejecutando analizarEvento");
-export interface Regla {
+import type { Severity } from "../adapters/aiAdapter.ts";
+
+// Rule definition for pattern matching and scoring
+export interface Rule {
   palabra: string;
   puntos: number;
-  nivel: Severidad;
+  nivel: Severity;
   tipo?: string;
 }
 
-const reglas: Regla[] = [
+// Ruleset for severity classification
+const rules: Rule[] = [
   { palabra: "ransomware", puntos: 5, nivel: "CRITICAL", tipo: "malware" },
   { palabra: "data breach", puntos: 5, nivel: "CRITICAL", tipo: "fuga de datos" },
   { palabra: "rootkit", puntos: 5, nivel: "CRITICAL", tipo: "persistencia" },
@@ -31,63 +33,62 @@ const reglas: Regla[] = [
   { palabra: "sin autorización explícita", puntos: 3, nivel: "HIGH", tipo: "acceso no autorizado" },
 ];
 
-
-
-export interface AnalisisSeveridad {
-  severidad: Severidad;
-  puntuacion: number;
-  coincidencias: Regla[];
-  explicacion: string;
+// Structured output of severity analysis
+export interface SeverityAnalysis {
+  severity: Severity;
+  score: number;
+  matches: Rule[];
+  explanation: string;
 }
 
+// Main engine: analyzes event text and returns severity classification
+export function analyzeEvent(event: string): SeverityAnalysis {
+  const lower = event.toLowerCase();
+  let score = 0;
+  const matches: Rule[] = [];
 
-
-export function analizarEvento(evento: string): AnalisisSeveridad {
-  const lower = evento.toLowerCase();
-  let puntuacion = 0;
-  const coincidencias: Regla[] = [];
-
-  for (const regla of reglas) {
-    if (lower.includes(regla.palabra)) {
-      puntuacion += regla.puntos;
-      coincidencias.push(regla);
+  for (const rule of rules) {
+    if (lower.includes(rule.palabra)) {
+      score += rule.puntos;
+      matches.push(rule);
     }
   }
 
-  
+  const levels = matches.map((r) => r.nivel);
+  const highCount = levels.filter((n) => n === "HIGH").length;
+  const medCount = levels.filter((n) => n === "MED").length;
 
-  const niveles = coincidencias.map((r) => r.nivel);
-  const highCount = niveles.filter((n) => n === "HIGH").length;
-  const medCount = niveles.filter((n) => n === "MED").length;
+  let severity: Severity = "LOW";
 
-  let severidad: Severidad = "LOW";
-
-  if (niveles.includes("CRITICAL")) {
-    severidad = "CRITICAL";
-  } else if (highCount >= 3 || puntuacion >= 10) {
-    severidad = "CRITICAL";
+  if (levels.includes("CRITICAL")) {
+    severity = "CRITICAL";
+  } else if (highCount >= 3 || score >= 10) {
+    severity = "CRITICAL";
   } else if (highCount >= 2 || medCount >= 3) {
-    severidad = "HIGH";
-  } else if (puntuacion >= 3 || medCount >= 2) {
-    severidad = "MED";
+    severity = "HIGH";
+  } else if (score >= 3 || medCount >= 2) {
+    severity = "MED";
   }
 
-  const explicacion = generarExplicacion(severidad, coincidencias);
+  const explanation = generateExplanation(severity, matches);
 
-  return { severidad, puntuacion, coincidencias, explicacion };
+  return { severity, score, matches, explanation };
 }
 
-function generarExplicacion(severidad: Severidad, coincidencias: Regla[]): string {
-  if (coincidencias.length === 0) return "No se detectaron patrones relevantes.";
-console.log("🚨 Ejecutando analizarEvento");
-  const tipos = coincidencias
+// Generates a textual explanation based on matched rules
+function generateExplanation(severity: Severity, matches: Rule[]): string {
+  if (matches.length === 0) return "No relevant patterns were detected.";
+
+  console.log("🚨 Running analyzeEvent");
+
+  const types = matches
     .map((r) => r.tipo)
     .filter(Boolean)
     .map((t) => t!.toLowerCase());
 
-  const resumenTipos = tipos.length
-    ? `Se detectaron patrones relacionados con: ${[...new Set(tipos)].join(", ")}.`
-    : "Se detectaron múltiples coincidencias relevantes.";
+  const typeSummary = types.length
+    ? `Detected patterns related to: ${[...new Set(types)].join(", ")}.`
+    : "Multiple relevant matches were detected.";
 
-  return `${resumenTipos} El evento fue clasificado como ${severidad} por la combinación de señales detectadas.`;
+  return `${typeSummary} The event was classified as ${severity} based on the combination of detected signals.`;
 }
