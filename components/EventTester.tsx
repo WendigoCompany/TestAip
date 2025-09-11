@@ -151,7 +151,7 @@ export default function EventTester() {
     setEventText(e.target.value);
   };
 
-  console.log(result);
+  console.log("RESULTADO EVENT TESTER",result);
   
 
   return (
