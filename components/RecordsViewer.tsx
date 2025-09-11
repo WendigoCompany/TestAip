@@ -18,7 +18,7 @@ export default function RecordsViewer() {
 
   useEffect(() => {
     const fetchAlarms = async () => {
-      const res = await fetch('/db/records');
+      const res = await fetch('/api/records');
       console.log(res);
       const data: Alarm[] = await res.json();
       setAlarms(data);
