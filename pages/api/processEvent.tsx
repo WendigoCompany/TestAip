@@ -62,6 +62,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { processEvent } from '@/lib/adapters/aiAdapter.ts';
 import { PrismaClient } from '@prisma/client';
+import { log } from 'node:console';
 
 const prisma = new PrismaClient();
 
@@ -77,7 +78,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const result = await processEvent(evento);
-
+    console.log("ENTRE EN 1");
+    
     // Persist the result in Neon via Prisma
     const alarm = await prisma.alarm.create({
       data: {
@@ -88,7 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         timestamp: new Date(),
       },
     });
-    console.log(alarm);
+
     
     res.status(200).json(alarm);
   } catch (err) {
