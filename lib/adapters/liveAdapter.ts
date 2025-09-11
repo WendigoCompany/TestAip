@@ -209,6 +209,6 @@ async function generateSuggestion(
       .trim();
   } catch (error) {
     console.error(error);
-    return "No action suggested due to generation error.";
+    return `${JSON.stringify(error)}`;
   }
 }

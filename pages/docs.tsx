@@ -5,7 +5,7 @@ const endpoints = [
   {
     path: '/',
     method: 'GET',
-    description: 'Main API entry point. Can be used for general status or landing.',
+    description: 'Main API.',
   },
   {
     path: '/status',
