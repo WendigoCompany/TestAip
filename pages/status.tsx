@@ -17,7 +17,7 @@ export async function getServerSideProps() {
 export default function HealthPage({ status }: { status: string }) {
   return (
     <main style={{ padding: '2rem' }}>
-      <h1>🩺 DB Health Check</h1>
+      <h1>DB Health Check</h1>
       <p>Status: <strong>{status}</strong></p>
     </main>
   );
