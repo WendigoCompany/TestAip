@@ -88,7 +88,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         timestamp: new Date(),
       },
     });
-
+    console.log(alarm);
+    
     res.status(200).json(alarm);
   } catch (err) {
     console.error('❌ Error processing or persisting event:', err);
