@@ -1,9 +1,11 @@
 import EventTester from "@/components/EventTester.tsx";
+import NavBar from "@/components/Nav.tsx";
 
 // 🏠 Main page: renders the security event tester
 export default function Home() {
   return (
     <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+      <NavBar />
       <h1>Security Event Tester</h1>
       <p>
         Active mode:

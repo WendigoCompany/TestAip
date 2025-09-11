@@ -54,13 +54,15 @@
     "incremental": true,
     "esModuleInterop": true,
     "moduleResolution": "NodeNext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
   ],
+  "typeRoots": ["./node_modules/@types"],
   "exclude": [
     "node_modules"
   ]
