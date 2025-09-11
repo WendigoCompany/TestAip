@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^6.16.0",
+    "@tailwindcss/postcss": "^4.1.13",
     "@types/next": "^9.0.0",
     "next": "^15.5.2",
     "openai": "^5.20.0",

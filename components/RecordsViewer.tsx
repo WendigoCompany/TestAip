@@ -24,7 +24,7 @@ export default function RecordsViewer() {
         const data: Alarm[] = await res.json();
         setAlarms(data);
       } catch (err) {
-        console.error("❌ Error al obtener alarmas:", err);
+        console.error("❌ Failed to fetch alarms:", err);
       }
     };
     fetchAlarms();
@@ -35,16 +35,15 @@ export default function RecordsViewer() {
   );
 
   const paginated = filtered.slice(page * limit, (page + 1) * limit);
-
   const totalPages = Math.ceil(filtered.length / limit);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>📡 Alarmas registradas</h2>
+    <div className="p-8 bg-white text-black dark:bg-gray-900 dark:text-gray-100 min-h-screen">
+      <h2 className="text-2xl font-bold mb-6">Records</h2>
 
-      {/* Filtro por fecha */}
-      <div style={{ marginBottom: "1rem" }}>
-        <label>Filtrar por fecha (YYYY-MM-DD): </label>
+      {/* Date filter */}
+      <div className="mb-4">
+        <label className="block mb-1">Filter by date (YYYY-MM-DD):</label>
         <input
           type="text"
           value={filterDate}
@@ -53,18 +52,20 @@ export default function RecordsViewer() {
             setPage(0);
           }}
           placeholder="2025-09-11"
+          className="px-3 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-gray-100 w-full max-w-sm"
         />
       </div>
 
-      {/* Selector de cantidad */}
-      <div style={{ marginBottom: "1rem" }}>
-        <label>Mostrar: </label>
+      {/* Limit selector */}
+      <div className="mb-4">
+        <label className="block mb-1">Show:</label>
         <select
           value={limit}
           onChange={(e) => {
             setLimit(Number(e.target.value));
             setPage(0);
           }}
+          className="px-3 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-gray-100 w-full max-w-xs"
         >
           <option value={10}>10</option>
           <option value={25}>25</option>
@@ -72,54 +73,68 @@ export default function RecordsViewer() {
         </select>
       </div>
 
-      {/* Tarjetas */}
-      {paginated.map((alarm) => (
-        <div
-          key={alarm.id}
-          onClick={() =>
-            setExpandedId(expandedId === alarm.id ? null : alarm.id)
-          }
-          style={{
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            padding: "1rem",
-            marginBottom: "1rem",
-            cursor: "pointer",
-            background: expandedId === alarm.id ? "#f9f9f9" : "#fff",
-          }}
+      {/* Alarm cards */}
+      {paginated.map((alarm) => {
+        const isExpanded = expandedId === alarm.id;
+
+        return (
+          <div
+            key={alarm.id}
+            onClick={() =>
+              setExpandedId(isExpanded ? null : alarm.id)
+            }
+            className={`border rounded-lg p-4 mb-4 cursor-pointer transition-colors ${
+              isExpanded
+                ? "bg-blue-50 dark:bg-gray-700"
+                : "bg-white dark:bg-gray-800"
+            } border-blue-300 dark:border-blue-500`}
+          >
+            <strong
+              className={`block mb-2 ${
+                !isExpanded ? "text-orange-500 dark:text-orange-400" : ""
+              }`}
+            >
+              {new Date(alarm.timestamp).toLocaleString()}
+            </strong>
+            <p className={`${!isExpanded ? "text-orange-500 dark:text-orange-400" : ""}`}>
+              {alarm.text}
+            </p>
+
+            {isExpanded && (
+              <div className="mt-4 space-y-2">
+                <p>
+                  <strong>Severity:</strong> {alarm.severity}
+                </p>
+                <p>
+                  <strong>Summary:</strong> {alarm.summary}
+                </p>
+                <p>
+                  <strong>Action:</strong> {alarm.action}
+                </p>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Pagination */}
+      <div className="mt-6 flex items-center gap-4">
+        <button
+          disabled={page === 0}
+          onClick={() => setPage((p) => p - 1)}
+          className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50"
         >
-          <strong>{new Date(alarm.timestamp).toLocaleString()}</strong>
-          <p>{alarm.text}</p>
-
-          {expandedId === alarm.id && (
-            <div style={{ marginTop: "1rem" }}>
-              <p>
-                <strong>Severidad:</strong> {alarm.severity}
-              </p>
-              <p>
-                <strong>Resumen:</strong> {alarm.summary}
-              </p>
-              <p>
-                <strong>Acción:</strong> {alarm.action}
-              </p>
-            </div>
-          )}
-        </div>
-      ))}
-
-      {/* Paginación */}
-      <div style={{ marginTop: "1rem" }}>
-        <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>
-          ⬅️ Anterior
+          ⬅️ Previous
         </button>
-        <span style={{ margin: "0 1rem" }}>
-          Página {page + 1} de {totalPages}
+        <span>
+          Page <strong>{page + 1}</strong> of <strong>{totalPages}</strong>
         </span>
         <button
           disabled={page + 1 >= totalPages}
           onClick={() => setPage((p) => p + 1)}
+          className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 disabled:opacity-50"
         >
-          Siguiente ➡️
+          Next ➡️
         </button>
       </div>
     </div>

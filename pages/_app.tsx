@@ -9,11 +9,9 @@ type AppProps = {
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div className="bg-white text-black dark:bg-gray-900 dark:text-gray-100 min-h-screen transition-colors">
       <NavBar />
       <Component {...pageProps} />
-    </>
+    </div>
   );
 }
-
-

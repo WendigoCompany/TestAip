@@ -1,3 +1,5 @@
+
+import DarkModeToggle from '@/lib/adapters/darkMode.tsx';
 // @ts-ignore
 import Link from 'next/link';
 // @ts-ignore
@@ -15,20 +17,20 @@ export default function NavBar() {
   const router = useRouter();
 
   return (
-    <nav style={{ padding: '1rem', borderBottom: '1px sol id #ccc' }}>
+    <nav className="p-4 border-b border-gray-300 dark:border-gray-700 dark: text-black dark:text-gray-100">
       {navItems.map(({ label, href }) => (
         <Link key={href} href={href} passHref>
           <span
-            style={{
-              marginRight: '1rem',
-              fontWeight: router.pathname === href ? 'bold' : 'normal',
-              cursor: 'pointer',
-            }}
+            className={`mr-4 cursor-pointer ${router.pathname === href
+                ? "text-orange-500 dark:text-orange-400 font-bold"
+                : "text-gray-800 dark:text-gray-300"
+              }`}
           >
             {label}
           </span>
         </Link>
       ))}
+      <DarkModeToggle />
     </nav>
   );
 }

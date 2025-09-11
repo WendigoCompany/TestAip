@@ -28,21 +28,27 @@ const endpoints = [
 
 export default function DocsPage() {
   return (
-    <main style={{ padding: "2rem" }}>
-        <div className="bg-red-500 text-white p-4 rounded">
-      Tailwind is working 🚀
-    </div>
-  
-      <h1>API Documentation</h1>
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {endpoints.map(({ path, method, description }) => (
-          <li key={path} style={{ marginBottom: "1.5rem" }}>
+    <main className="p-8 bg-white text-black dark:bg-gray-900 dark:text-gray-100">
+      <h1 className="text-3xl font-bold mb-6">API Documentation</h1>
+      <ul className="list-none p-0">
+        {endpoints.map(({ path, method, description }, index) => (
+          <li key={path} className="mb-6">
             <Link href={path}>
-              <strong style={{ fontSize: "1.1rem" }}>
+              <strong
+                className="
+                  text-lg font-semibold
+                  text-blue-700 dark:text-blue-400
+                  hover:text-orange-500 dark:hover:text-orange-400
+                  transition-colors
+                  cursor-pointer
+                "
+              >
                 {method} {path}
               </strong>
             </Link>
-            <p style={{ margin: "0.5rem 0 0" }}>{description}</p>
+            <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">{description}</p>
+
+            <hr className="mt-4 border-t-2 border-orange-400 dark:border-orange-500" />
           </li>
         ))}
       </ul>

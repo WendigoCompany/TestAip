@@ -49,48 +49,45 @@ export default function EventTester() {
     setEventText(e.target.value);
   };
 
-  
+
 
   return (
-    <div>
+    <div className="p-8 bg-white text-black dark:bg-gray-900 dark:text-gray-100 min-h-screen">
+      {/* Loading overlay */}
       {loading && (
         <div
           ref={waitAnimation}
-          style={{
-            opacity: 0,
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0,0,0,0.8)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "opacity .3s",
-          }}
+          className="fixed inset-0 bg-black bg-opacity-80 z-[9999] flex items-center justify-center transition-opacity opacity-0"
         >
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/3/36/Lightness_rotate_36f-L_cw.gif"
             alt="Loading..."
-            style={{ width: "80px", height: "80px" }}
+            className="w-20 h-20"
           />
         </div>
       )}
 
+      {/* Textarea input */}
       <textarea
         ref={textareaRef}
         value={eventText}
         onChange={handleChange}
         placeholder="Type the event..."
         rows={4}
-        style={{ width: "100%" }}
+        className="w-full px-4 py-3 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-gray-100 mb-4"
       />
-      <button onClick={sendEvent}>Process event</button>
 
+      {/* Submit button */}
+      <button
+        onClick={sendEvent}
+        className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+      >
+        Process event
+      </button>
+
+      {/* Result display */}
       {result && (
-        <div style={{ marginTop: "1rem" }}>
+        <div className="mt-6 space-y-2">
           <p>
             <strong>Summary:</strong> {result.summary}
           </p>
@@ -104,5 +101,6 @@ export default function EventTester() {
       )}
     </div>
   );
+
 }
 
