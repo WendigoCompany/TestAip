@@ -2,11 +2,9 @@
   "type": "module",
   "scripts": {
     "init-db": "tsx lib/db/postgres.init.ts",
-    "vercel-prebuild": "psql \"$POSTGREST_DB_URL\" -f ./sql/init.sql",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "vercel-deploy": "npm run vercel-prebuild && npm run build"
+    "start": "next start"
   },
   "devDependencies": {
     "@types/next": "^9.0.0",
