@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "vercel-deploy": "pm2 stop db-monitor-dev && pm2 stop next-dev && npm run build && pm2 start ecosystem.config.windows.dev.cjs"
+    "vercel-deploy": "npm install -g pm2 && pm2 stop db-monitor-dev && pm2 stop next-dev && npm run build && pm2 start ecosystem.config.windows.dev.cjs"
   },
   "devDependencies": {
     "@types/next": "^9.0.0",
