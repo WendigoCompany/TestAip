@@ -45,3 +45,5 @@ coverage/
 
 # Optional: local cache
 .cache/
+
+/generated/prisma
