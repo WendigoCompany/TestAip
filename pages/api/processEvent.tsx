@@ -62,7 +62,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { processEvent } from '@/lib/adapters/aiAdapter.ts';
 import { PrismaClient } from '@prisma/client';
-import { log } from 'node:console';
+
 
 const prisma = new PrismaClient();
 
@@ -90,9 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         timestamp: new Date(),
       },
     });
-    
-    console.log(result);
-    
+
     res.status(200).json(result);
   } catch (err) {
     console.error('❌ Error processing or persisting event:', err);
