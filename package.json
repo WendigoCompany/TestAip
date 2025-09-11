@@ -1,7 +1,6 @@
 {
   "type": "module",
   "scripts": {
-    "init-db": "tsx lib/db/postgres.init.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -19,10 +18,8 @@
     "next": "^15.5.2",
     "openai": "^5.20.0",
     "pg": "^8.16.3",
-    "pg-hstore": "^2.3.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "sequelize": "^6.37.7",
     "tsx": "^4.20.5"
   }
 }
