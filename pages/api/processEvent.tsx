@@ -78,7 +78,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const result = await processEvent(evento);
-    console.log("ENTRE EN 1");
+
     
     // Persist the result in Neon via Prisma
     const alarm = await prisma.alarm.create({
@@ -90,9 +90,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         timestamp: new Date(),
       },
     });
-
     
-    res.status(200).json(alarm);
+    res.status(200).json(result);
   } catch (err) {
     console.error('❌ Error processing or persisting event:', err);
     res.status(500).json({ error: 'Internal server error' });
