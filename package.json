@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "vercel-deploy": "npm run prebuild && npm run build"
+    "vercel-deploy": "npm run vercel-prebuild && npm run build"
   },
   "devDependencies": {
     "@types/next": "^9.0.0",
