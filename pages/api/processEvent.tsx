@@ -60,7 +60,7 @@
 
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { processEvent } from '@/lib/adapters/aiAdapter.tsx';
+import { processEvent } from '@/lib/adapters/aiAdapter.ts';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();

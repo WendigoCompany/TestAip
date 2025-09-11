@@ -105,7 +105,7 @@
 // }
 
 import OpenAI from "openai";
-import type { AIResult, Severity } from "./aiAdapter.js";
+import type { AIResult, Severity } from "./aiAdapter.ts";
 
 // HuggingFace client for suggestion generation
 const client = new OpenAI({
