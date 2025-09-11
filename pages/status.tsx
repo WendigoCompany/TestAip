@@ -1,4 +1,4 @@
-// pages/db/health.tsx
+import NavBar from '@/components/Nav.tsx';
 import { PrismaClient } from '@prisma/client';
 
 export async function getServerSideProps() {
@@ -17,6 +17,7 @@ export async function getServerSideProps() {
 export default function HealthPage({ status }: { status: string }) {
   return (
     <main style={{ padding: '2rem' }}>
+         <NavBar />
       <h1>DB Health Check</h1>
       <p>Status: <strong>{status}</strong></p>
     </main>

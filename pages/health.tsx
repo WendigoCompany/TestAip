@@ -1,4 +1,3 @@
-// pages/redirect.tsx
 export async function getServerSideProps() {
   return {
     redirect: {
