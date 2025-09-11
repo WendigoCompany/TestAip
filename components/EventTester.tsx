@@ -114,7 +114,7 @@ export default function EventTester() {
     if (!eventText.trim()) return;
     try {
       setLoading(true);
-      const res = await fetch("/api/processEvent", {
+      const res = await fetch("/api/process-event", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ evento: eventText }),

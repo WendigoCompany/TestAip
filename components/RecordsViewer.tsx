@@ -16,20 +16,20 @@ export default function RecordsViewer() {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
-//   useEffect(() => {
-//     const fetchAlarms = async () => {
-//       try {
-//         const res = await fetch("/api/records");
-//         if (!res.ok) throw new Error(`Error ${res.status}`);
-//         const data: Alarm[] = await res.json();
-//         console.log(data);
-//         // setAlarms(data);
-//       } catch (err) {
-//         console.error("❌ Error al obtener alarmas:", err);
-//       }
-//     };
-//     fetchAlarms();
-//   }, []);
+  useEffect(() => {
+    const fetchAlarms = async () => {
+      try {
+        const res = await fetch("/api/get-records");
+        if (!res.ok) throw new Error(`Error ${res.status}`);
+        const data: Alarm[] = await res.json();
+        console.log(data);
+        // setAlarms(data);
+      } catch (err) {
+        console.error("❌ Error al obtener alarmas:", err);
+      }
+    };
+    fetchAlarms();
+  }, []);
 
   const filtered = alarms.filter((alarm) =>
     filterDate ? alarm.timestamp.startsWith(filterDate) : true
