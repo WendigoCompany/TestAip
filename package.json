@@ -1,17 +1,27 @@
 {
+  "name": "api-consultas-seguridad",
+  "version": "1.0.0",
+  "description": "Fullstack app using Next.js, Prisma, PostgreSQL and TypeScript",
   "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "prepare": "prisma generate"
   },
-  "devDependencies": {
-    "@types/node": "^24.3.1",
-    "@types/react": "19.1.12",
-    "cross-env": "^10.0.0",
-    "prisma": "^6.16.0",
-    "typescript": "^5.9.2"
-  },
+  "keywords": [
+    "nextjs",
+    "prisma",
+    "typescript",
+    "postgresql",
+    "ssr"
+  ],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "@prisma/client": "^6.16.0",
     "@types/next": "^9.0.0",
@@ -21,5 +31,18 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tsx": "^4.20.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "@types/react": "19.1.12",
+    "cross-env": "^10.0.0",
+    "prisma": "^6.16.0",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
   }
 }

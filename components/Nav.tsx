@@ -5,8 +5,10 @@ import { useRouter } from 'next/router';
 
 
 const navItems = [
-  { label: '🚨 Main Api', href: '/' },
-  { label: '📁 DB - Records', href: '/db/records' },
+  { label: 'Main Api', href: '/' },
+  { label: 'DB - Records', href: '/db/records' },
+  { label: 'Status', href: '/status' },
+  { label: 'Docs', href: '/docs' },
 ];
 
 export default function NavBar() {
