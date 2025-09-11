@@ -151,7 +151,6 @@ export default function EventTester() {
     setEventText(e.target.value);
   };
 
-  console.log("RESULTADO EVENT TESTER",result);
   
 
   return (
@@ -195,13 +194,13 @@ export default function EventTester() {
       {result && (
         <div style={{ marginTop: "1rem" }}>
           <p>
-            <strong>Summary:</strong> {result.resumen}
+            <strong>Summary:</strong> {result.summary}
           </p>
           <p>
-            <strong>Severity:</strong> {result.severidad}
+            <strong>Severity:</strong> {result.severity}
           </p>
           <p>
-            <strong>Suggested action:</strong> {result.accion}
+            <strong>Suggested action:</strong> {result.action}
           </p>
         </div>
       )}
