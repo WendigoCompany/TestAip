@@ -22,7 +22,8 @@ export default function RecordsViewer() {
         const res = await fetch("/api/records");
         if (!res.ok) throw new Error(`Error ${res.status}`);
         const data: Alarm[] = await res.json();
-        setAlarms(data);
+        console.log(data);
+        // setAlarms(data);
       } catch (err) {
         console.error("❌ Error al obtener alarmas:", err);
       }
