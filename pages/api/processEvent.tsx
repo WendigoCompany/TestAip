@@ -91,6 +91,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
     
+    console.log(result);
+    
     res.status(200).json(result);
   } catch (err) {
     console.error('❌ Error processing or persisting event:', err);
