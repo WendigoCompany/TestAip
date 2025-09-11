@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npx prisma db push && npx prisma generate && next build",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}
